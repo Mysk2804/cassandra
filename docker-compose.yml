@@ -22,7 +22,6 @@ services:
       - CASSANDRA_SEEDS=cas1
     networks:
       mynetwork:
-        - ipv4_address: 192.168.1.200
 
 
  cas2:
@@ -42,7 +41,6 @@ services:
       - CASSANDRA_SEEDS=cas1
   networks:
     mynetwork:
-      - ipv4_address: 192.168.1.201
 
 
  cas3:
@@ -62,7 +60,6 @@ services:
       - CASSANDRA_SEEDS=cas1
   networks:
     mynetwork:
-      - ipv4_address: 192.168.1.202
 
 
 networks:
