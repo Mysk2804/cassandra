@@ -1,0 +1,74 @@
+version: '3'
+
+services:
+ cas1:
+    container_name: cas1
+    hostname: cas1
+    image: cassandra:latest
+    volumes:
+      - C:/Users/mysk2/PycharmProjects/Cassandra/node1:/var/lib/cassandra/data
+    expose:
+      - 7000
+      - 7001
+      - 7199
+      - 9042
+      - 9142
+    ports:
+      - 9042:9042
+    environment:
+      - CASSANDRA_CLUSTER_NAME=MyCluster
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=datacenter1
+      - CASSANDRA_SEEDS=cas1
+    networks:
+      mynetwork:
+        - ipv4_address: 192.168.1.200
+
+
+ cas2:
+  container_name: cas2
+  hostname: cas2
+  image: cassandra:latest
+  volumes:
+      - C:/Users/mysk2/PycharmProjects/Cassandra/node2:/var/lib/cassandra/data
+  ports:
+      - 9043:9042
+  depends_on:
+    - cas1
+  environment:
+      - CASSANDRA_CLUSTER_NAME=MyCluster
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=datacenter1
+      - CASSANDRA_SEEDS=cas1
+  networks:
+    mynetwork:
+      - ipv4_address: 192.168.1.201
+
+
+ cas3:
+  container_name: cas3
+  hostname: cas3
+  image: cassandra:latest
+  volumes:
+      - C:/Users/mysk2/PycharmProjects/Cassandra/node22:/var/lib/cassandra/data
+  ports:
+      - 9044:9042
+  depends_on:
+    - cas1
+  environment:
+      - CASSANDRA_CLUSTER_NAME=MyCluster
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=datacenter1
+      - CASSANDRA_SEEDS=cas1
+  networks:
+    mynetwork:
+      - ipv4_address: 192.168.1.202
+
+
+networks:
+  mynetwork:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.1.198/26
+
