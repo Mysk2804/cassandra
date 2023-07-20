@@ -5,8 +5,6 @@ services:
     container_name: cas1
     hostname: cas1
     image: cassandra:latest
-    volumes:
-      - ~/PycharmProjects/Cassandra/node1:/var/lib/cassandra/data
     ports:
       - 9042:9042
     environment:
@@ -24,8 +22,6 @@ services:
   container_name: cas2
   hostname: cas2
   image: cassandra:latest
-  volumes:
-      - ~/PycharmProjects/Cassandra/node2:/var/lib/cassandra/data
   ports:
       - 9043:9042
   depends_on:
@@ -44,8 +40,6 @@ services:
   container_name: cas3
   hostname: cas3
   image: cassandra:latest
-  volumes:
-      - ~/PycharmProjects/Cassandra/node3:/var/lib/cassandra/data
   ports:
       - 9044:9042
   depends_on:
