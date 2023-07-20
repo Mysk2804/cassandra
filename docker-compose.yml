@@ -64,9 +64,10 @@ services:
 networks:
   default:
   mynetwork:
-    driver: macvlan
+    driver: ipvlan
     driver_opts:
       parent: enp0s3
     ipam:
       config:
         - subnet: 192.168.1.0/24
+          gateway: 192.168.1.1
